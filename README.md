@@ -1,5 +1,17 @@
 # Sonora : mon lecteur de musique perso, 100 % gratuit
 
+## 📱 Version en ligne (téléphone, partout, sans PC)
+**https://ousmanelassinecoulibaly-rgb.github.io/sonora/**
+
+- Elle tourne entièrement dans le navigateur. Le « serveur de poche » `web/backend.js` remplace le serveur du PC.
+- Elle est hébergée gratuitement par GitHub Pages, depuis le dossier `docs/`.
+- La bibliothèque et les goûts appris sont gardés **dans le téléphone**. Utilise *Réglages → Sauvegarde* de temps en temps.
+- La clé YouTube du site (`docs/config.js`) ne fonctionne que depuis cette adresse.
+
+**Publier une modification de l'app :** `node scripts/build-web.js`, puis `git add -A`, `git commit -m "..."` et `git push`. GitHub met le site à jour en environ une minute.
+
+## 💻 Version locale (PC)
+
 Une alternative à Spotify qui tourne en local : accueil, recherche, titres likés, playlists, file d'attente, mode aléatoire et répétition, **recommandations** et **radios d'artiste**. Aucun abonnement.
 
 ## Lancer
