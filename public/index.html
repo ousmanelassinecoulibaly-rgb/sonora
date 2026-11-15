@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sonora</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#121212">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Sonora">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Barre latérale -->
+    <aside class="sidebar">
+      <div class="panel nav-panel">
+        <a class="brand" href="#/home">
+          <span class="brand-logo"><svg viewBox="0 0 24 24"><rect x="3" y="10" width="3" height="4" rx="1.5"/><rect x="7.5" y="6" width="3" height="12" rx="1.5"/><rect x="12" y="3" width="3" height="18" rx="1.5"/><rect x="16.5" y="7.5" width="3" height="9" rx="1.5"/></svg></span>
+          <span>Sonora</span>
+        </a>
+        <nav>
+          <a class="nav-link" data-nav="home" href="#/home">
+            <svg viewBox="0 0 24 24"><path d="M12 3 3 10v11h6v-6h6v6h6V10l-9-7Z"/></svg>Accueil
+          </a>
+          <a class="nav-link" data-nav="search" href="#/search">
+            <svg viewBox="0 0 24 24"><path d="M10.5 3a7.5 7.5 0 0 1 5.9 12.1l4.8 4.8-1.4 1.4-4.8-4.8A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"/></svg>Rechercher
+          </a>
+          <a class="nav-link" data-nav="settings" href="#/settings">
+            <svg viewBox="0 0 24 24"><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 0 0-1.7-1L15 3h-4l-.4 2.7a7.4 7.4 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.6 7.6 0 0 0 0 2l-2.2 1.6 2 3.5 2.5-1c.5.4 1.1.7 1.7 1L11 21h4l.4-2.7c.6-.3 1.2-.6 1.7-1l2.5 1 2-3.5-2.2-1.8ZM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z"/></svg>Réglages
+          </a>
+        </nav>
+      </div>
+
+      <div class="panel library-panel">
+        <div class="library-head">
+          <span class="library-title">
+            <svg viewBox="0 0 24 24"><path d="M4 3h2v18H4V3Zm5 0h2v18H9V3Zm5.2.4 1.9-.7 6 16.9-1.9.7-6-16.9Z"/></svg>
+            Ma bibliothèque
+          </span>
+          <button class="icon-btn" id="btn-new-playlist" title="Créer une playlist" aria-label="Créer une playlist">
+            <svg viewBox="0 0 24 24"><path d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6V5Z"/></svg>
+          </button>
+        </div>
+        <ul class="library-list" id="library-list"></ul>
+      </div>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main class="main panel" id="main">
+      <header class="topbar" id="topbar">
+        <div class="history-btns">
+          <button class="round-btn" onclick="history.back()" aria-label="Précédent">
+            <svg viewBox="0 0 24 24"><path d="M15.5 4.5 8 12l7.5 7.5-1.4 1.4L5.2 12l8.9-8.9 1.4 1.4Z"/></svg>
+          </button>
+          <button class="round-btn" onclick="history.forward()" aria-label="Suivant">
+            <svg viewBox="0 0 24 24"><path d="M8.5 4.5 16 12l-7.5 7.5 1.4 1.4 8.9-8.9-8.9-8.9-1.4 1.4Z"/></svg>
+          </button>
+        </div>
+        <div class="search-box" id="search-box" hidden>
+          <svg viewBox="0 0 24 24"><path d="M10.5 3a7.5 7.5 0 0 1 5.9 12.1l4.8 4.8-1.4 1.4-4.8-4.8A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"/></svg>
+          <input id="search-input" type="search" placeholder="Que souhaitez-vous écouter ?" autocomplete="off">
+        </div>
+      </header>
+      <div class="view" id="view"></div>
+    </main>
+
+    <!-- Lecteur -->
+    <footer class="player">
+      <div class="now-playing" id="now-playing">
+        <div class="np-art" id="np-art"></div>
+        <div class="np-meta">
+          <div class="np-title" id="np-title">Aucun titre</div>
+          <div class="np-artist" id="np-artist">Choisis un morceau pour commencer</div>
+        </div>
+        <button class="icon-btn heart" id="np-like" aria-label="Ajouter aux titres likés" hidden></button>
+      </div>
+
+      <div class="controls">
+        <div class="control-btns">
+          <button class="icon-btn" id="btn-shuffle" title="Lecture aléatoire" aria-label="Lecture aléatoire">
+            <svg viewBox="0 0 24 24"><path d="M17 3l4 4-4 4V8h-2.3l-3.2 4 3.2 4H17v-3l4 4-4 4v-3h-3.3l-3.5-4.4L6.7 18H3v-2h2.7l3.2-4-3.2-4H3V6h3.7l3.5 4.4L13.7 6H17V3Z"/></svg>
+          </button>
+          <button class="icon-btn" id="btn-prev" aria-label="Précédent">
+            <svg viewBox="0 0 24 24"><path d="M6 5h2v14H6V5Zm3.5 7L19 5v14l-9.5-7Z"/></svg>
+          </button>
+          <button class="play-btn" id="btn-play" aria-label="Lecture"></button>
+          <button class="icon-btn" id="btn-next" aria-label="Suivant">
+            <svg viewBox="0 0 24 24"><path d="M16 5h2v14h-2V5ZM5 5l9.5 7L5 19V5Z"/></svg>
+          </button>
+          <button class="icon-btn" id="btn-repeat" title="Répéter" aria-label="Répéter">
+            <svg viewBox="0 0 24 24"><path d="M7 7h10V4l4 4-4 4V9H7a3 3 0 0 0-3 3v1H2v-1a5 5 0 0 1 5-5Zm10 10H7v3l-4-4 4-4v3h10a3 3 0 0 0 3-3v-1h2v1a5 5 0 0 1-5 5Z"/></svg>
+            <span class="repeat-one" id="repeat-one">1</span>
+          </button>
+        </div>
+        <div class="progress-row">
+          <span class="time" id="time-cur">0:00</span>
+          <input type="range" class="slider" id="seek" min="0" max="1000" value="0" aria-label="Position">
+          <span class="time" id="time-dur">0:00</span>
+        </div>
+      </div>
+
+      <div class="extra">
+        <button class="icon-btn" id="btn-queue" title="File d'attente" aria-label="File d'attente">
+          <svg viewBox="0 0 24 24"><path d="M3 5h14v2H3V5Zm0 6h14v2H3v-2Zm0 6h8v2H3v-2Zm12 0 6-3.5v7L15 17Z"/></svg>
+        </button>
+        <button class="icon-btn" id="btn-mute" aria-label="Couper le son"></button>
+        <input type="range" class="slider volume" id="volume" min="0" max="100" value="80" aria-label="Volume">
+      </div>
+    </footer>
+  </div>
+
+  <!-- Barre de navigation mobile -->
+  <nav class="mobile-nav">
+    <a data-nav="home" href="#/home"><svg viewBox="0 0 24 24"><path d="M12 3 3 10v11h6v-6h6v6h6V10l-9-7Z"/></svg>Accueil</a>
+    <a data-nav="search" href="#/search"><svg viewBox="0 0 24 24"><path d="M10.5 3a7.5 7.5 0 0 1 5.9 12.1l4.8 4.8-1.4 1.4-4.8-4.8A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"/></svg>Rechercher</a>
+    <a data-nav="library" href="#/library"><svg viewBox="0 0 24 24"><path d="M4 3h2v18H4V3Zm5 0h2v18H9V3Zm5.2.4 1.9-.7 6 16.9-1.9.7-6-16.9Z"/></svg>Bibliothèque</a>
+    <a data-nav="settings" href="#/settings"><svg viewBox="0 0 24 24"><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 0 0-1.7-1L15 3h-4l-.4 2.7a7.4 7.4 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.6 7.6 0 0 0 0 2l-2.2 1.6 2 3.5 2.5-1c.5.4 1.1.7 1.7 1L11 21h4l.4-2.7c.6-.3 1.2-.6 1.7-1l2.5 1 2-3.5-2.2-1.8ZM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z"/></svg>Réglages</a>
+  </nav>
+
+  <!-- Lecteur YouTube officiel (doit rester visible selon les conditions de YouTube) -->
+  <div class="yt-dock" id="yt-dock" hidden><div id="yt-player"></div></div>
+
+  <div class="menu" id="menu" hidden></div>
+  <div class="modal-backdrop" id="modal" hidden>
+    <form class="modal" id="modal-form">
+      <h2 id="modal-title">Nouvelle playlist</h2>
+      <p class="modal-text" id="modal-text"></p>
+      <input id="modal-input" maxlength="80">
+      <div class="modal-actions">
+        <button type="button" class="btn ghost" id="modal-cancel">Annuler</button>
+        <button type="submit" class="btn primary" id="modal-ok">Enregistrer</button>
+      </div>
+    </form>
+  </div>
+  <div class="toast" id="toast" hidden></div>
+  <audio id="audio" preload="auto"></audio>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+# Contient ta clé API YouTube et tes données perso : ne pas partager
+data/youtube.json
+data/youtube-cache.json
+data/library.json
+data/taste-signals.json
+data/youtube-web.json
+data/deezer-*.json
+*.tmp
+node_modules/

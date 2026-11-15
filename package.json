@@ -1,0 +1,13 @@
+{
+  "name": "sonora",
+  "version": "1.0.0",
+  "description": "Mon lecteur de musique personnel façon Spotify, gratuit, basé sur l'API Audius",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
