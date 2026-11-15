@@ -1,6 +1,6 @@
 // Service worker minimal : rend Sonora installable et affiche l'interface même si le réseau est lent.
 // Stratégie « réseau d'abord » : on sert toujours la dernière version, le cache n'est qu'un secours.
-const CACHE = 'sonora-shell-mwi7dofo';
+const CACHE = 'sonora-shell-mwi7spg0';
 const SHELL = ['./', 'index.html', 'styles.css', 'app.js', 'favicon.svg', 'manifest.webmanifest', 'icons/icon-192.png'];
 const OPTIONAL = ['config.js', 'recommender.js', 'backend.js', 'seed-library.json']; // version en ligne uniquement
 
